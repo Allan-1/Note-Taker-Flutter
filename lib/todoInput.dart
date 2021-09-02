@@ -14,6 +14,11 @@ class _TodoInputState extends State<TodoInput> {
   final _todoController = TextEditingController();
   final _titleController = TextEditingController();
 
+  void _submitData(){
+    widget.todo(_titleController.text, _todoController.text);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,16 +40,12 @@ class _TodoInputState extends State<TodoInput> {
               maxLines: 2,
               decoration: InputDecoration(labelText: 'Add todo'),
               onSubmitted: (_) {
-                widget.todo(_todoController.text);
-                Navigator.of(context).pop();
+                _submitData();
               },
             ),
           ),
           TextButton(
-              onPressed: () {
-                widget.todo(_titleController.text, _todoController.text);
-                Navigator.of(context).pop();
-              },
+              onPressed: _submitData,
               child: Text('Add Todo'))
         ],
       ),
