@@ -11,7 +11,8 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 400,
+        height: MediaQuery.of(context).size.height -
+            (MediaQuery.of(context).padding.top + kToolbarHeight),
         child: todos.length > 0
             ? ListView.builder(
                 itemCount: todos.length,
@@ -66,10 +67,9 @@ class TodoList extends StatelessWidget {
                   ));
                 })
             : Center(
-                heightFactor: 20,
                 child: Text(
-                  'Press the + button to add Todo',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )));
+                'Press the + button to add Todo',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )));
   }
 }
