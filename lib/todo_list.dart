@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 
 class TodoList extends StatelessWidget {
   final List<Todo> todos;
-  const TodoList(this.todos);
+  final Function _deleteTodo;
+  const TodoList(this.todos, this._deleteTodo);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class TodoList extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: 13, color: Colors.grey),
                                   ),
+                                  ElevatedButton(onPressed: ()=> _deleteTodo(todo.id), child: Icon(Icons.delete))
                                 ],
                               )),
                         ));

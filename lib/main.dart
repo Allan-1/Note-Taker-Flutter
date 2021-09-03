@@ -39,6 +39,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _deleteTodo(String id){
+    setState(() {
+      _todo.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   void _startNewTodo(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -66,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         width: double.infinity,
         child: Column(
           children: [
-            TodoList(_todo),
+            TodoList(_todo, _deleteTodo),
           ],
         ),
       )),
