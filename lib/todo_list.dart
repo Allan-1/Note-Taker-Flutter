@@ -11,50 +11,60 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: 400,
         child: todos.length > 0
-            ? Column(
-                children: [
-                  ...todos.map((todo) {
-                    return Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 3, horizontal: 8),
-                        width: double.infinity,
-                        child: Card(
-                          elevation: 6,
-                          child: Padding(
-                              padding: EdgeInsets.all(7),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                      child: Text(
-                                    todo.title,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 23,
+            ? ListView.builder(
+                itemCount: todos.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                      child: Column(
+                    children: [
+                      Container(
+                          margin:
+                              EdgeInsets.symmetric(vertical: 3, horizontal: 8),
+                          width: double.infinity,
+                          child: Card(
+                            elevation: 6,
+                            child: Padding(
+                                padding: EdgeInsets.all(7),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                        child: Text(
+                                      todos[index].title,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 23,
+                                      ),
+                                    )),
+                                    Text(
+                                      '${todos[index].items}',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
                                     ),
-                                  )),
-                                  Text(
-                                    '${todo.items}',
-                                    style: TextStyle(
-                                      fontSize: 20,
+                                    SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    'Date created: ${DateFormat.yMMMd().format(todo.date)}',
-                                    style: TextStyle(
-                                        fontSize: 13, color: Colors.grey),
-                                  ),
-                                  ElevatedButton(onPressed: ()=> _deleteTodo(todo.id), child: Icon(Icons.delete))
-                                ],
-                              )),
-                        ));
-                  }).toList()
-                ],
-              )
+                                    Text(
+                                      'Date created: ${DateFormat.yMMMd().format(todos[index].date)}',
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.grey),
+                                    ),
+                                    IconButton(
+                                        onPressed: () =>
+                                            _deleteTodo(todos[index].id),
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ))
+                                  ],
+                                )),
+                          ))
+                    ],
+                  ));
+                })
             : Center(
                 heightFactor: 20,
                 child: Text(
