@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   void _deleteTodo(String id){
     setState(() {
-      _todo.removeWhere((tx) => tx.id == id);
+      _todo.removeWhere((tod) => tod.id == id);
     });
   }
 
